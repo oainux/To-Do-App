@@ -1,0 +1,449 @@
+$color-0:#000;
+$color-1:#555;
+$color-2:#eee;
+$color-3:#ff5e4c;
+$color-4:#ffbe00;
+$color-5:#00cd27;
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+a {
+    display:inline-block;
+    text-decoration: none;
+}
+button,
+select {
+    border:0;
+    outline:0;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+@mixin flex($direction) {
+    display:flex;
+    flex-direction: $direction;
+}
+
+html {
+    color:#fff;
+    text-align: center;
+    font-family: Roboto, sans-serif;
+}
+
+body {
+    @include flex(column);
+	justify-content: center;
+	align-items: center;
+    background-color: $color-0;
+	min-height: 100vh;
+	overflow: scroll;
+	opacity: 1;
+	background-image: radial-gradient(rgb(65, 65, 65) 0.5px, rgb(0, 0, 0) 0.5px);
+	background-size: 10px 10px;
+}
+
+.filtered {
+    filter:blur(2px) brightness(0.6);
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+    overflow: hidden
+}
+
+main {
+    @include flex(column);
+	justify-content: center;
+    gap:1em;
+	padding-block: 15vh;
+    padding-inline: 2em;
+	width:100%;
+	max-width: 700px;
+}
+
+h1 {
+    font-family: "Smooch",sans-serif;
+    font-weight: 700;
+    font-size:clamp(2rem,10vw,2.5rem);
+    letter-spacing: 0.1em;
+    color: $color-2;
+	background-clip: text;
+}
+
+form {
+    @include flex(column);
+    align-content: items;
+    gap:0.5em;
+}
+
+form button {
+	color: $color-0;
+    font-size: clamp(0.7rem,3.8vw,1.05rem);
+    padding-block:0.7em;
+    border-radius: 0.5vmax;
+    background-color: $color-2;
+}
+
+input {
+    display:block;
+	padding:0.7em 1em;
+    border-radius: 0.5vmax;
+    caret-color: $color-2;
+    color: $color-2;
+    font-size: clamp(0.7rem,3.8vw,1.05rem);
+
+	&::placeholder { 
+        font-size: clamp(0.7rem,3.5vw,1.05rem);
+        color:hsla(0 0% 100% / 0.7);
+    }
+}
+
+section {
+    @include flex(column);
+    gap:1em;
+}
+
+section:first-of-type {
+	input {
+        border:1px solid $color-2;
+        background-color: $color-0;
+    }
+}
+
+
+
+
+.tasks-sec {
+	text-align: left;
+
+	&__quick-functions {
+    	@include flex(row);
+    	justify-content: space-between;
+
+		select,
+		.clear-all-btn {
+    		background-color: $color-1;
+    		border-radius: min(0.5vmax,1em);
+    		color:$color-2;
+    		width:max-content;
+    		padding:0.5em 2em;
+    		font-size:min(3vw,0.9em);
+		}
+	}
+
+    &__tasks-card {
+       	border:1.5px solid $color-2;
+    	background-color: $color-0;
+        border-radius: 1vmax;
+    	padding-block:1.5em;
+        padding-inline:min(3.9vw,1em);
+        position: relative;
+
+        &__tasks-content {
+			@include flex(column);
+        	gap:0.35em;
+        	position:relative;
+        	padding-left:min(3vw,0.8em);
+			width:80%;
+			&__headings {
+        		font-size: clamp(1rem,5vw,1.2rem);
+    		}
+
+            &__descriptions {
+        		font-size: clamp(0.7rem,3.5vw,0.9rem);
+            }
+
+            &__line {
+        		height:100%;
+        		width:min(0.5vw,2.5px);
+        		border-radius:100vmax;
+        		background-color: $color-4;
+        		position: absolute;
+        		left:0;
+        		top:0;
+        		bottom:0;
+   			}
+
+			&__completed-text {
+        		color:#999;  
+        		text-decoration: line-through 
+    		}
+
+            &__line-completed {
+        		background-color: $color-5;
+    		}
+        }
+
+        &__btns-container {
+        	@include flex(row);
+        	gap:min(1.8vw,0.7em);
+        	position: absolute;
+        	top:min(4vw,1em);
+        	right:0.8em;
+
+            > button {
+        		width:min(3.5vw,1.4em);
+        		height:min(3.5vw,1.4em);
+        		border-radius:50%;
+    		}
+
+			&__delete-btn {
+        		background-color: $color-3;
+				box-shadow: inset 0 0 0 2px #e64334;
+    		}
+
+            &__edit-btn {
+        		background-color: $color-4;
+				box-shadow: inset 0 0 0 2px #e6a100;
+    		}
+            
+            &__completed-btn {
+        		background-color: $color-5;
+				box-shadow: inset 0 0 0 2px #00ba2c;
+    		}
+
+    		&__edit-task-msg {
+        		z-index: 99;
+        		display:none;
+        		width:75%;
+				max-width: 350px;
+        		border-radius: 1.5vmax;
+        		position: fixed;
+        		background-color: #222;
+        		border:1.5px solid $color-2;
+        		left:50%;
+        		top:50%;
+    			transform: translate(-50%,-50%);
+        		padding-inline:1em;
+        		justify-content: center;
+
+                &__edit-task-content {
+            		width: 100%;
+         			@include flex(column);
+        			text-align: center;
+        			align-items: center;
+        			gap:min(2.9vw,1.5em);
+        			padding-block:min(8vmax,6em);
+            		position: relative;
+        		}
+
+                &__close-edit {
+            		position:absolute;
+            		top:min(6vw,2.5em);
+            		right:0;
+            		width:min(5vw,23px);
+            		height:min(5vw,23px);
+
+            		> div {
+                		@include flex(column);
+                		position:relative;
+                		width:100%;
+                		height:100%;
+            		}
+
+            		div div {
+                		position:absolute;
+                		width:100%;
+                		height:2px;
+                		border-radius:1vmax;
+                		background-color: $color-2;
+            		}
+
+                    div div:first-child {
+                		transform: rotate(45deg);
+            		}
+
+            		div div:last-child {
+                		transform: rotate(-45deg);
+            		}
+        		}
+
+                form {
+				    max-width: 300px;
+            		width:100%;
+            		gap:min(2vw,0.7em);
+        		}
+
+        		h3 {
+            		font-size: clamp(1.8rem,8vw,2.3rem);
+            		color:$color-2;
+            		letter-spacing: 0.1em;
+        		}
+
+        		input {
+           			width: 100%;
+        			background-color:$color-0;
+            		border:1.5px solid $color-2;
+        		}
+    		}
+
+            &__edit-task-msg-visible {
+        		@include flex(row);
+    		}
+		}
+    }
+}
+
+@media (min-width:600px) {
+	h1 {
+		font-size: 3rem;
+	}
+	.tasks-sec__tasks-card {
+		padding-block: 2em;
+		&__tasks-content {
+			&__headings {
+				font-size: 1.4rem;
+			}
+			&__descriptions {
+				font-size: 1rem;
+			}
+		}
+		&__btns-container {
+			> button {
+				width:1.55em;
+				height:1.55em;
+			}
+		}
+	}
+}
+@media (min-width:1000px) {
+	main {
+		max-width:750px;
+	}
+	input,
+	form button {
+		padding-block: 0.8em;
+	}
+	h1 {
+		font-size: 3.3rem;
+	}
+	.tasks-sec__tasks-card {
+		padding-block: 2.2em;
+		padding-inline: 1.2em;
+		&__tasks-content {
+			&__headings {
+				font-size: 1.5rem;
+			}
+			&__descriptions {
+				font-size: 1.1rem;
+			}
+		}
+		&__btns-container {
+			right:1.1em;
+			top:1.2em;
+			> button {
+				width:1.6em;
+				height:1.6em;
+			}
+		}
+	}	
+}
+
+@media (min-width:1300px) {
+	main {
+		max-width: 800px;
+	}
+	input,
+	form button {
+		font-size: 1.1rem;
+	}
+	h1 {
+		font-size: 3.6rem;
+	}
+	.tasks-sec__tasks-card {
+		padding-block: 2.4em;
+		padding-inline: 1.4em;
+		&__tasks-content {
+			&__headings {
+				font-size: 1.6rem;
+			}
+			&__descriptions {
+				font-size: 1.2rem;
+			}
+		}
+		&__btns-container {
+			top:1.3em;
+			right:1.2em;
+			> button {
+				width:1.65em;
+				height:1.65em;
+			}
+			&__edit-task-msg {
+				max-width: 375px;
+				&__edit-tast-content {
+					padding-block:min(8vmax,7em);
+				}
+				form {
+					max-width: 325px;
+				}
+			}	
+		}
+	}	
+}
+@media (min-width:1600px) {
+	main {
+		max-width: 850px;
+	}
+	input,
+	form button {
+		font-size: 1.15rem;
+	}
+	h1 {
+		font-size: 3.9rem;
+	}
+	.tasks-sec__tasks-card {
+		padding-block: 2.6em;
+		padding-inline: 1.6em;
+		&__tasks-content {
+			&__headings {
+				font-size: 1.7rem;
+			}
+			&__descriptions {
+				font-size: 1.3rem;
+			}
+		}
+		&__btns-container {
+			top:1.5em;
+			right:1.3em;
+			> button {
+				width:1.7em;
+				height:1.7em;
+			}	
+		}
+	}	
+}
+
+@media (min-width:1600px) {
+	main {
+		max-width: 900px;
+	}
+	input,
+	form button {
+		font-size: 1.2rem;
+	}
+	h1 {
+		font-size: 4.2rem;
+	}
+	.tasks-sec__tasks-card {
+		padding-block: 2.8em;
+		padding-inline: 1.8em;
+		&__tasks-content {
+			&__headings {
+				font-size: 1.8rem;
+			}
+			&__descriptions {
+				font-size: 1.4rem;
+			}
+		}
+		&__btns-container {
+			top:1.6em;
+			right:1.4em;
+			> button {
+				width:1.75em;
+				height:1.75em;
+			}	
+		}
+	}	
+}

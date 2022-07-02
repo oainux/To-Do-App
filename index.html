@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Oainux">
+    <meta name="theme-color" content="#000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no;user-scalable=0;">
+	<link rel="shortcut icon" href="https://i.postimg.cc/433KYJzR/7-F230-E96-A757-4-E32-91-CD-8-F973967-F285.png" type='image/x-icon'>
+    <meta name="description" content="Create and complete your tasks using this to do list app.">
+	<meta property=”og:title” content="To Do List">
+    <meta property=”og:url” content="https://oainux-todo.netlify.app">
+    <meta property=”og:description” content="Create and complete your tasks using this to do list app.">
+    <meta property=”og:type” content="Website">
+    <meta property='og:image' content="https://i.postimg.cc/g0KbXztK/8-D282-CE6-BFE9-43-C3-99-FE-27503-F29-C580.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@oainux">
+	<meta name="twitter:image" content="https://i.postimg.cc/g0KbXztK/8-D282-CE6-BFE9-43-C3-99-FE-27503-F29-C580.jpg">
+	<meta name="twitter:image:alt" content="Site Preview">
+	<meta name="twitter:title" content="To Do List">
+	<meta name="twitter:description" content="Create and complete your tasks using this to do list app.">
+    <title>To Do List</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Smooch&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+
+        <section>
+            <h1>To Do List</h1>
+            <form>
+           		<input type="text" required placeholder="Task" name="task">
+            	<input type="text" placeholder="Description (Optional)" name="description" class="description">
+         		<button class="create-task">Create Task</button>
+            </form>
+        </section>
+
+    	<section class="tasks-sec">
+        	<div class="tasks-sec__quick-functions">
+        	<select>
+            	<option value="all">All</option>
+				<option value="completed">Completed</option>
+            	<option value="active">Active</option>
+        	</select>
+        	<button class="clear-all-btn">Clear All</button>
+        </section>
+
+    </main>
+	<script src="main.js"></script>
+</body>
+</html>
