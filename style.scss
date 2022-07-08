@@ -32,6 +32,7 @@ html {
     color:#fff;
     text-align: center;
     font-family: Roboto, sans-serif;
+	height: -webkit-fill-available;
 }
 
 body {
@@ -40,7 +41,7 @@ body {
 	align-items: center;
     background-color: $color-0;
 	min-height: 100vh;
-	overflow: scroll;
+	min-height: -webkit-fill-available;
 	opacity: 1;
 	background-image: radial-gradient(rgb(65, 65, 65) 0.5px, rgb(0, 0, 0) 0.5px);
 	background-size: 10px 10px;
@@ -55,11 +56,11 @@ body {
 
 main {
     @include flex(column);
-	justify-content: center;
     gap:1em;
-	padding-block: 15vh;
+	padding-bottom: 10vh;
     padding-inline: 2em;
 	width:100%;
+	flex: 1;
 	max-width: 700px;
 }
 
@@ -102,10 +103,11 @@ input {
 
 section {
     @include flex(column);
-    gap:1em;
 }
 
 section:first-of-type {
+    gap:1em;
+	margin-top: 33vh;
 	input {
         border:1px solid $color-2;
         background-color: $color-0;
@@ -134,12 +136,14 @@ section:first-of-type {
 	}
 
     &__tasks-card {
+		margin-top: 1em;
        	border:1.5px solid $color-2;
     	background-color: $color-0;
         border-radius: 1vmax;
     	padding-block:1.5em;
         padding-inline:min(3.9vw,1em);
         position: relative;
+		transition: opacity 100ms ease-in, transform 100ms ease-in,height 100ms ease-in,padding 100ms ease-in;
 
         &__tasks-content {
 			@include flex(column);
@@ -285,7 +289,20 @@ section:first-of-type {
 		}
     }
 }
-
+.hidden {
+	opacity: 0;
+	pointer-events: none;
+	user-select: none;
+	border-width: 0px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	margin-top: 0;
+	height:0px;
+	padding-block: 0px;
+	overflow: hidden;
+	transition: opacity 100ms ease-in, transform 100ms ease-in,height 100ms ease-in,padding 100ms ease-in;
+}
 @media (min-width:600px) {
 	h1 {
 		font-size: 3rem;
@@ -447,3 +464,4 @@ section:first-of-type {
 		}
 	}	
 }
+

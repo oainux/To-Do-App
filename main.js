@@ -23,14 +23,14 @@ select.addEventListener("change", test)
 function test() {
     const value = select.options[select.selectedIndex].value;
     if (value == "completed") {
-        document.querySelectorAll(".completed-task").forEach(tsk => tsk.style.display = "block");
-        document.querySelectorAll(".uncompleted-task").forEach(tsk => tsk.style.display = "none");
+        document.querySelectorAll(".completed-task").forEach(tsk => tsk.classList.remove("hidden"));
+        document.querySelectorAll(".uncompleted-task").forEach(tsk => tsk.classList.add("hidden"));
     }
     else if (value == "active") {
-        document.querySelectorAll(".uncompleted-task").forEach(tsk => tsk.style.display = "block");
-        document.querySelectorAll(".completed-task").forEach(tsk => tsk.style.display = "none");
+        document.querySelectorAll(".uncompleted-task").forEach(tsk => tsk.classList.remove("hidden"));
+        document.querySelectorAll(".completed-task").forEach(tsk => tsk.classList.add("hidden"));
     }
-    else document.querySelectorAll(".tasks-sec__tasks-card").forEach(tsk => tsk.style.display = "block")
+    else document.querySelectorAll(".tasks-sec__tasks-card").forEach(tsk => tsk.classList.remove("hidden"));
 }
 
 /* get tasks from local host and create task cards */

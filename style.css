@@ -21,6 +21,7 @@ html {
   color: #fff;
   text-align: center;
   font-family: Roboto, sans-serif;
+  height: -webkit-fill-available;
 }
 
 body {
@@ -30,7 +31,7 @@ body {
   align-items: center;
   background-color: #000;
   min-height: 100vh;
-  overflow: scroll;
+  min-height: -webkit-fill-available;
   opacity: 1;
   background-image: radial-gradient(#414141 0.5px, black 0.5px);
   background-size: 10px 10px;
@@ -46,11 +47,11 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 1em;
-  padding-block: 15vh;
+  padding-bottom: 10vh;
   padding-inline: 2em;
   width: 100%;
+  flex: 1;
   max-width: 700px;
 }
 
@@ -94,9 +95,12 @@ input::placeholder {
 section {
   display: flex;
   flex-direction: column;
-  gap: 1em;
 }
 
+section:first-of-type {
+  gap: 1em;
+  margin-top: 33vh;
+}
 section:first-of-type input {
   border: 1px solid #eee;
   background-color: #000;
@@ -120,12 +124,14 @@ section:first-of-type input {
   font-size: min(3vw, 0.9em);
 }
 .tasks-sec__tasks-card {
+  margin-top: 1em;
   border: 1.5px solid #eee;
   background-color: #000;
   border-radius: 1vmax;
   padding-block: 1.5em;
   padding-inline: min(3.9vw, 1em);
   position: relative;
+  transition: opacity 100ms ease-in, transform 100ms ease-in, height 100ms ease-in, padding 100ms ease-in;
 }
 .tasks-sec__tasks-card__tasks-content {
   display: flex;
@@ -253,6 +259,21 @@ section:first-of-type input {
 .tasks-sec__tasks-card__btns-container__edit-task-msg-visible {
   display: flex;
   flex-direction: row;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  border-width: 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  margin-top: 0;
+  height: 0px;
+  padding-block: 0px;
+  overflow: hidden;
+  transition: opacity 100ms ease-in, transform 100ms ease-in, height 100ms ease-in, padding 100ms ease-in;
 }
 
 @media (min-width: 600px) {
